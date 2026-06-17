@@ -19,4 +19,8 @@ public class FigureEntity {
     private String name;
     private Double price;
     private Integer quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryEntity category;
 }
