@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.application.port.service;
+package com.torami.ToramiStore.application.service;
 
 import com.torami.ToramiStore.application.port.in.IFigureService;
 import com.torami.ToramiStore.application.port.out.ICategoryRepository;
