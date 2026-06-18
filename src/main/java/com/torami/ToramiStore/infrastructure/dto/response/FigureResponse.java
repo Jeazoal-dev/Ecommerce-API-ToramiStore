@@ -16,9 +16,6 @@ public class FigureResponse {
     private String name;
     private Double price;
     private Integer quantity;
+    private CategoryResponse category;
 
-    public static FigureResponse fromDomain(Figure figure) {
-        return new FigureResponse(figure.getId(), figure.getCode(), figure.getName(),
-                figure.getPrice(), figure.getQuantity());
-    }
 }
