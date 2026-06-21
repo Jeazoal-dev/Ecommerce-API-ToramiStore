@@ -1,8 +1,8 @@
-package com.torami.ToramiStore.application.service;
+package com.torami.ToramiStore.application.service.filters;
 
-import com.torami.ToramiStore.application.port.in.ILineService;
-import com.torami.ToramiStore.application.port.out.ILineRepository;
-import com.torami.ToramiStore.domain.exceptions.LineNotFoundException;
+import com.torami.ToramiStore.application.port.in.filters.ILineService;
+import com.torami.ToramiStore.application.port.out.filters.ILineRepository;
+import com.torami.ToramiStore.domain.exceptions.filters.LineNotFoundException;
 import com.torami.ToramiStore.domain.models.filters.Line;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

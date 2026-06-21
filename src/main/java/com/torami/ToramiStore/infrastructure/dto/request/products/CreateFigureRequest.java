@@ -11,4 +11,7 @@ public class CreateFigureRequest {
     private Double price;
     private Integer quantity;
     private Integer categoryId;
+    private Integer lineId;
+    private Integer manufacturerId;
+    private Integer serieId;
 }

@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.application.port.out;
+package com.torami.ToramiStore.application.port.out.filters;
 
 import com.torami.ToramiStore.domain.models.filters.Line;
 
