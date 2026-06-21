@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.infrastructure.dto.response;
+package com.torami.ToramiStore.infrastructure.dto.response.products;
 
 import com.torami.ToramiStore.infrastructure.dto.response.filters.CategoryResponse;
 import com.torami.ToramiStore.infrastructure.dto.response.filters.LineResponse;

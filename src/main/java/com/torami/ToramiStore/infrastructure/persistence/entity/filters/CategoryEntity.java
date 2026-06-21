@@ -1,5 +1,6 @@
-package com.torami.ToramiStore.infrastructure.persistence.entity;
+package com.torami.ToramiStore.infrastructure.persistence.entity.filters;
 
+import com.torami.ToramiStore.infrastructure.persistence.entity.products.FigureEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

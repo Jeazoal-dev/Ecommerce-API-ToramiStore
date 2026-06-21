@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.infrastructure.dto.request;
+package com.torami.ToramiStore.infrastructure.dto.request.products;
 
 import lombok.Getter;
 import lombok.Setter;

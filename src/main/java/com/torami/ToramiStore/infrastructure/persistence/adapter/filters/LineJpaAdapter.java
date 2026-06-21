@@ -1,9 +1,9 @@
-package com.torami.ToramiStore.infrastructure.persistence.adapter;
+package com.torami.ToramiStore.infrastructure.persistence.adapter.filters;
 
 import com.torami.ToramiStore.application.port.out.filters.ILineRepository;
 import com.torami.ToramiStore.domain.models.filters.Line;
 import com.torami.ToramiStore.infrastructure.persistence.mapper.filters.LineMapper;
-import com.torami.ToramiStore.infrastructure.persistence.repository.LineJpaRepository;
+import com.torami.ToramiStore.infrastructure.persistence.repository.filters.LineJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

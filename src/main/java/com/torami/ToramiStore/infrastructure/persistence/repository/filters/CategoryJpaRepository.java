@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.infrastructure.persistence.repository;
+package com.torami.ToramiStore.infrastructure.persistence.repository.filters;
 
 import com.torami.ToramiStore.infrastructure.persistence.entity.filters.CategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.infrastructure.persistence.repository;
+package com.torami.ToramiStore.infrastructure.persistence.repository.products;
 
 import com.torami.ToramiStore.infrastructure.persistence.entity.products.FigureEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

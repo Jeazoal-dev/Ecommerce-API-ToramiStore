@@ -1,10 +1,10 @@
 package com.torami.ToramiStore.infrastructure.controller;
 
-import com.torami.ToramiStore.application.port.in.IFigureService;
-import com.torami.ToramiStore.domain.model.Figure;
-import com.torami.ToramiStore.infrastructure.dto.request.CreateFigureRequest;
-import com.torami.ToramiStore.infrastructure.dto.response.FigureResponse;
-import com.torami.ToramiStore.infrastructure.persistence.mapper.Figure.FigureResponseMapper;
+import com.torami.ToramiStore.application.port.in.products.IFigureService;
+import com.torami.ToramiStore.domain.models.products.Figure;
+import com.torami.ToramiStore.infrastructure.dto.request.products.CreateFigureRequest;
+import com.torami.ToramiStore.infrastructure.dto.response.products.FigureResponse;
+import com.torami.ToramiStore.infrastructure.persistence.mapper.products.FigureResponseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,10 @@ public class FigureController {
                 request.getName(),
                 request.getPrice(),
                 request.getQuantity(),
-                request.getCategoryId()
+                request.getCategoryId(),
+                request.getLineId(),
+                request.getManufacturerId(),
+                request.getSerieId()
         );
 
         return ResponseEntity.status(HttpStatus.CREATED)

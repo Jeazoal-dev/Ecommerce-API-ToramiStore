@@ -1,9 +1,9 @@
-package com.torami.ToramiStore.infrastructure.persistence.adapter;
+package com.torami.ToramiStore.infrastructure.persistence.adapter.filters;
 
 import com.torami.ToramiStore.application.port.out.filters.IManufacturerRepository;
 import com.torami.ToramiStore.domain.models.filters.Manufacturer;
 import com.torami.ToramiStore.infrastructure.persistence.mapper.filters.ManufacturerMapper;
-import com.torami.ToramiStore.infrastructure.persistence.repository.ManufacturerJpaRepository;
+import com.torami.ToramiStore.infrastructure.persistence.repository.filters.ManufacturerJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

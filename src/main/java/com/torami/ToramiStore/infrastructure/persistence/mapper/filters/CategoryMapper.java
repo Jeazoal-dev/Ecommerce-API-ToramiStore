@@ -1,7 +1,7 @@
-package com.torami.ToramiStore.infrastructure.persistence.mapper.Category;
+package com.torami.ToramiStore.infrastructure.persistence.mapper.filters;
 
 import com.torami.ToramiStore.domain.models.filters.Category;
-import com.torami.ToramiStore.infrastructure.persistence.entity.CategoryEntity;
+import com.torami.ToramiStore.infrastructure.persistence.entity.filters.CategoryEntity;
 import org.springframework.stereotype.Component;
 
 @Component

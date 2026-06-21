@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.infrastructure.dto.response;
+package com.torami.ToramiStore.infrastructure.dto.response.filters;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
