@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.infrastructure.persistence.mapper;
+package com.torami.ToramiStore.infrastructure.persistence.mapper.Figure;
 
 import com.torami.ToramiStore.domain.model.Figure;
 import com.torami.ToramiStore.infrastructure.dto.response.CategoryResponse;
@@ -16,8 +16,7 @@ public class FigureResponseMapper {
                 ? new CategoryResponse(
                 figure.getCategory().getId(),
                 figure.getCategory().getName()
-        )
-                : null;
+        ) : null;
 
         return new FigureResponse(
                 figure.getId(),

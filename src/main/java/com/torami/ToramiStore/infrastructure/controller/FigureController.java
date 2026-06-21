@@ -4,8 +4,7 @@ import com.torami.ToramiStore.application.port.in.IFigureService;
 import com.torami.ToramiStore.domain.model.Figure;
 import com.torami.ToramiStore.infrastructure.dto.request.CreateFigureRequest;
 import com.torami.ToramiStore.infrastructure.dto.response.FigureResponse;
-import com.torami.ToramiStore.infrastructure.persistence.mapper.FigureMapper;
-import com.torami.ToramiStore.infrastructure.persistence.mapper.FigureResponseMapper;
+import com.torami.ToramiStore.infrastructure.persistence.mapper.Figure.FigureResponseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +17,9 @@ public class FigureController {
 
     private final IFigureService figureService;
     private final FigureResponseMapper figureResponseMapper;
+
     @PostMapping
-    public ResponseEntity<FigureResponse> createFigure(@RequestBody CreateFigureRequest request){
+    public ResponseEntity<FigureResponse> createFigure(@RequestBody CreateFigureRequest request) {
 
         Figure figure = figureService.createFigure(
                 request.getCode(),
@@ -34,7 +34,7 @@ public class FigureController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FigureResponse>getFigure(@PathVariable Integer id){
+    public ResponseEntity<FigureResponse> getFigure(@PathVariable Integer id) {
         Figure figure = figureService.getFigureById(id);
         return ResponseEntity.ok(figureResponseMapper.toResponse(figure));
     }

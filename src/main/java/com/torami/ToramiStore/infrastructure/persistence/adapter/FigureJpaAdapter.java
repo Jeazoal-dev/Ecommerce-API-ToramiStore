@@ -3,7 +3,7 @@ package com.torami.ToramiStore.infrastructure.persistence.adapter;
 import com.torami.ToramiStore.application.port.out.IFigureRepository;
 import com.torami.ToramiStore.domain.model.Figure;
 import com.torami.ToramiStore.infrastructure.persistence.entity.FigureEntity;
-import com.torami.ToramiStore.infrastructure.persistence.mapper.FigureMapper;
+import com.torami.ToramiStore.infrastructure.persistence.mapper.Figure.FigureMapper;
 import com.torami.ToramiStore.infrastructure.persistence.repository.FigureJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
