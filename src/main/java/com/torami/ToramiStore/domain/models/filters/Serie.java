@@ -1,21 +1,22 @@
-package com.torami.ToramiStore.domain.model;
+package com.torami.ToramiStore.domain.models.filters;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Serie {
     private Integer id;
     private String name;
 
-    public Category(String name) {
+    public Serie(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre de la categoría no puede estar vacío");
+            throw new IllegalArgumentException("Serie name cannot be empty");
         }
+
         this.name = name;
     }
+
 }

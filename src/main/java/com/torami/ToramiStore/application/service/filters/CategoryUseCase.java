@@ -2,8 +2,8 @@ package com.torami.ToramiStore.application.service;
 
 import com.torami.ToramiStore.application.port.in.ICategoryService;
 import com.torami.ToramiStore.application.port.out.ICategoryRepository;
-import com.torami.ToramiStore.domain.exception.CategoryNotFoundException;
-import com.torami.ToramiStore.domain.model.Category;
+import com.torami.ToramiStore.domain.exceptions.CategoryNotFoundException;
+import com.torami.ToramiStore.domain.models.filters.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.torami.ToramiStore.infrastructure.persistence.adapter;
 
-import com.torami.ToramiStore.application.port.out.ICategoryRepository;
-import com.torami.ToramiStore.domain.model.Category;
+import com.torami.ToramiStore.application.port.out.filters.ICategoryRepository;
+import com.torami.ToramiStore.domain.models.filters.Category;
 import com.torami.ToramiStore.infrastructure.persistence.mapper.Category.CategoryMapper;
 import com.torami.ToramiStore.infrastructure.persistence.repository.CategoryJpaRepository;
 import lombok.RequiredArgsConstructor;

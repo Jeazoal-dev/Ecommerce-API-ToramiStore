@@ -1,7 +1,7 @@
 package com.torami.ToramiStore.infrastructure.persistence.mapper.Figure;
 
-import com.torami.ToramiStore.domain.model.Category;
-import com.torami.ToramiStore.domain.model.Figure;
+import com.torami.ToramiStore.domain.models.filters.Category;
+import com.torami.ToramiStore.domain.models.products.Figure;
 import com.torami.ToramiStore.infrastructure.persistence.entity.FigureEntity;
 import com.torami.ToramiStore.infrastructure.persistence.mapper.Category.CategoryMapper;
 import lombok.RequiredArgsConstructor;

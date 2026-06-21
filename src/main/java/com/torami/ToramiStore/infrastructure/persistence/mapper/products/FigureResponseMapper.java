@@ -1,6 +1,6 @@
 package com.torami.ToramiStore.infrastructure.persistence.mapper.Figure;
 
-import com.torami.ToramiStore.domain.model.Figure;
+import com.torami.ToramiStore.domain.models.products.Figure;
 import com.torami.ToramiStore.infrastructure.dto.response.CategoryResponse;
 import com.torami.ToramiStore.infrastructure.dto.response.FigureResponse;
 import lombok.RequiredArgsConstructor;

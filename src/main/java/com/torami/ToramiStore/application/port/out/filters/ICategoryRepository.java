@@ -1,8 +1,7 @@
 package com.torami.ToramiStore.application.port.out;
 
-import com.torami.ToramiStore.domain.model.Category;
+import com.torami.ToramiStore.domain.models.filters.Category;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface ICategoryRepository {

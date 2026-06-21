@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.domain.exception;
+package com.torami.ToramiStore.domain.exceptions;
 
 public class CategoryNotFoundException extends RuntimeException {
 
@@ -13,5 +13,5 @@ public class CategoryNotFoundException extends RuntimeException {
     public CategoryNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
-    
+
 }
