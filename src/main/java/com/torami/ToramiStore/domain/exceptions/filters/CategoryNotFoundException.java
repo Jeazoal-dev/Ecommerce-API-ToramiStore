@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.domain.exceptions;
+package com.torami.ToramiStore.domain.exceptions.filters;
 
 public class CategoryNotFoundException extends RuntimeException {
 

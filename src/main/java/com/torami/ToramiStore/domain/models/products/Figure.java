@@ -1,6 +1,6 @@
 package com.torami.ToramiStore.domain.models.products;
 
-import com.torami.ToramiStore.domain.exceptions.InvalidFigureException;
+import com.torami.ToramiStore.domain.exceptions.filters.InvalidFigureException;
 import com.torami.ToramiStore.domain.models.filters.Category;
 import com.torami.ToramiStore.domain.models.filters.Line;
 import com.torami.ToramiStore.domain.models.filters.Manufacturer;
