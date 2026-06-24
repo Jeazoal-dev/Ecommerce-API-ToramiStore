@@ -33,7 +33,7 @@ public class LineUseCase implements ILineService {
     @Override
     public Line updateLine(Integer id, Line line) {
         getLineById(id);
-        Line lineToUpdate = new Line(line.getId(), line.getName());
+        Line lineToUpdate = new Line(id, line.getName());
         return lineRepository.save(lineToUpdate);
     }
 
