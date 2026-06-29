@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ManufacturerResponseMapper {
+
     public ManufacturerResponse toResponse(Manufacturer manufacturer) {
         return new ManufacturerResponse(
                 manufacturer.getId(),

@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/Manufacturer")
+@RequestMapping("/manufacturer")
 @RequiredArgsConstructor
 public class ManufacturerController {
 
-    private final IManufacturerService manufacturerService;
-    private final ManufacturerResponseMapper manufacturerResponseMapper;
+    private final IManufacturerService service;
+    private final ManufacturerResponseMapper responseMapper;
 
     @PostMapping
     public ResponseEntity<ApiResponse<ManufacturerResponse>> createManufacturer(
@@ -31,8 +31,8 @@ public class ManufacturerController {
             HttpServletRequest httpRequest) {
 
         Manufacturer manufacturer = new Manufacturer(request.getName());
-        Manufacturer saved = manufacturerService.createManufacturer(manufacturer);
-        ManufacturerResponse data = manufacturerResponseMapper.toResponse(saved);
+        Manufacturer saved = service.createManufacturer(manufacturer);
+        ManufacturerResponse data = responseMapper.toResponse(saved);
 
         ApiResponse<ManufacturerResponse> apiResponse = ApiResponse.created(
                 data,
@@ -47,9 +47,9 @@ public class ManufacturerController {
     public ResponseEntity<ApiResponse<List<ManufacturerResponse>>> getAllManufacturers(
             HttpServletRequest request) {
 
-        List<Manufacturer> manufacturers = manufacturerService.getAllManufacturers();
+        List<Manufacturer> manufacturers = service.getAllManufacturers();
         List<ManufacturerResponse> data = manufacturers.stream()
-                .map(manufacturerResponseMapper::toResponse)
+                .map(responseMapper::toResponse)
                 .collect(Collectors.toList());
 
         ApiResponse<List<ManufacturerResponse>> apiResponse = ApiResponse.success(
@@ -66,8 +66,8 @@ public class ManufacturerController {
             @PathVariable Integer id,
             HttpServletRequest request) {
 
-        Manufacturer manufacturer = manufacturerService.getManufacturerById(id);
-        ManufacturerResponse data = manufacturerResponseMapper.toResponse(manufacturer);
+        Manufacturer manufacturer = service.getManufacturerById(id);
+        ManufacturerResponse data = responseMapper.toResponse(manufacturer);
 
         ApiResponse<ManufacturerResponse> apiResponse = ApiResponse.success(
                 data,
@@ -85,8 +85,8 @@ public class ManufacturerController {
             HttpServletRequest httpRequest) {
 
         Manufacturer manufacturer = new Manufacturer(request.getName());
-        Manufacturer updated = manufacturerService.updateManufacturer(id, manufacturer);
-        ManufacturerResponse data = manufacturerResponseMapper.toResponse(updated);
+        Manufacturer updated = service.updateManufacturer(id, manufacturer);
+        ManufacturerResponse data = responseMapper.toResponse(updated);
 
         ApiResponse<ManufacturerResponse> apiResponse = ApiResponse.success(
                 data,
@@ -102,9 +102,9 @@ public class ManufacturerController {
             @PathVariable Integer id,
             HttpServletRequest request) {
 
-        Manufacturer manufacturer = manufacturerService.getManufacturerById(id);
-        manufacturerService.deleteManufacturer(id);
-        ManufacturerResponse data = manufacturerResponseMapper.toResponse(manufacturer);
+        Manufacturer manufacturer = service.getManufacturerById(id);
+        service.deleteManufacturer(id);
+        ManufacturerResponse data = responseMapper.toResponse(manufacturer);
 
         ApiResponse<ManufacturerResponse> apiResponse = ApiResponse.success(
                 data,

@@ -16,60 +16,60 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CategoryJpaAdapter implements ICategoryRepository {
 
-    private final CategoryJpaRepository categoryJpaRepository;
-    private final CategoryMapper categoryMapper;
+    private final CategoryJpaRepository jpaRepository;
+    private final CategoryMapper mapper;
 
     @Override
     public Category save(Category category) {
-        CategoryEntity categoryEntity = categoryMapper.toEntity(category);
-        CategoryEntity savedEntity = categoryJpaRepository.save(categoryEntity);
-        return categoryMapper.toDomain(savedEntity);
+        CategoryEntity categoryEntity = mapper.toEntity(category);
+        CategoryEntity savedEntity = jpaRepository.save(categoryEntity);
+        return mapper.toDomain(savedEntity);
     }
 
 
     @Override
     public List<Category> findAll() {
-        return categoryJpaRepository.findAll().stream()
-                .map(categoryMapper::toDomain)
+        return jpaRepository.findAll().stream()
+                .map(mapper::toDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void deleteCategory(Integer id) {
-        categoryJpaRepository.deleteById(id);
+    public void delete(Integer id) {
+        jpaRepository.deleteById(id);
     }
 
     @Override
     public Optional<Category> findById(Integer id) {
-        return categoryJpaRepository.findById(id)
-                .map(categoryMapper::toDomain);
+        return jpaRepository.findById(id)
+                .map(mapper::toDomain);
     }
 
     @Override
     public boolean existsById(Integer id) {
-        return categoryJpaRepository.existsById(id);
+        return jpaRepository.existsById(id);
     }
 
     @Override
     public boolean existsByName(String name) {
-        return categoryJpaRepository.existsByName(name);
+        return jpaRepository.existsByName(name);
     }
 
     @Override
     public Category findByName(String name) {
-        return categoryJpaRepository.findByName(name)
-                .map(categoryMapper::toDomain)
+        return jpaRepository.findByName(name)
+                .map(mapper::toDomain)
                 .orElse(null);
     }
 
     @Override
     public int countFiguresByCategoryId(Integer categoryId) {
-        return categoryJpaRepository.countFiguresByCategoryId(categoryId);
+        return jpaRepository.countFiguresByCategoryId(categoryId);
     }
 
     @Override
     public long count() {
-        return categoryJpaRepository.count();
+        return jpaRepository.count();
     }
 
 }

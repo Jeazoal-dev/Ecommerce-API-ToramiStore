@@ -32,7 +32,7 @@ public class LineJpaAdapter implements ILineRepository {
     }
 
     @Override
-    public void deleteLine(Integer id) {
+    public void delete(Integer id) {
         lineJpaRepository.deleteById(id);
     }
 
@@ -41,11 +41,6 @@ public class LineJpaAdapter implements ILineRepository {
         LineEntity lineEntity = lineMapper.toEntity(line);
         LineEntity saveEntity = lineJpaRepository.save(lineEntity);
         return lineMapper.toDomain(saveEntity);
-    }
-
-    @Override
-    public boolean existsById(Integer id) {
-        return lineJpaRepository.existsById(id);
     }
 
     @Override

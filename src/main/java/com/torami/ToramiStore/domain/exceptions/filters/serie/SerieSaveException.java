@@ -12,7 +12,4 @@ public class SerieSaveException extends DomainException {
         super("Failed to save serie with name '" + name + "': " + message, "SERIE_SAVE_ERROR", 500, cause);
     }
 
-    public SerieSaveException(String message) {
-        super("Failed to save serie: " + message, "SERIE_SAVE_ERROR", 500);
-    }
 }

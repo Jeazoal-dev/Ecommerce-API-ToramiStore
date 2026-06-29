@@ -22,16 +22,16 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class LineController {
 
-    private final ILineService lineService;
-    private final LineResponseMapper lineResponseMapper;
+    private final ILineService service;
+    private final LineResponseMapper responseMapper;
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<LineResponse>> getLineById(
             @PathVariable Integer id,
             HttpServletRequest request) {
 
-        Line line = lineService.getLineById(id);
-        LineResponse data = lineResponseMapper.toResponse(line);
+        Line line = service.getLineById(id);
+        LineResponse data = responseMapper.toResponse(line);
 
         ApiResponse<LineResponse> apiResponse = ApiResponse.success(
                 data,
@@ -46,9 +46,9 @@ public class LineController {
     public ResponseEntity<ApiResponse<List<LineResponse>>> getAllLines(
             HttpServletRequest request) {
 
-        List<Line> lines = lineService.getAllLines();
+        List<Line> lines = service.getAllLines();
         List<LineResponse> data = lines.stream()
-                .map(lineResponseMapper::toResponse)
+                .map(responseMapper::toResponse)
                 .collect(Collectors.toList());
 
         ApiResponse<List<LineResponse>> apiResponse = ApiResponse.success(
@@ -66,8 +66,8 @@ public class LineController {
             HttpServletRequest httpRequest) {
 
         Line line = new Line(request.getName());
-        Line saved = lineService.createLine(line);
-        LineResponse data = lineResponseMapper.toResponse(saved);
+        Line saved = service.createLine(line);
+        LineResponse data = responseMapper.toResponse(saved);
 
         ApiResponse<LineResponse> apiResponse = ApiResponse.created(
                 data,
@@ -85,8 +85,8 @@ public class LineController {
             HttpServletRequest httpRequest) {
 
         Line line = new Line(request.getName());
-        Line updated = lineService.updateLine(id, line);
-        LineResponse data = lineResponseMapper.toResponse(updated);
+        Line updated = service.updateLine(id, line);
+        LineResponse data = responseMapper.toResponse(updated);
 
         ApiResponse<LineResponse> apiResponse = ApiResponse.success(
                 data,
@@ -102,9 +102,9 @@ public class LineController {
             @PathVariable Integer id,
             HttpServletRequest request) {
 
-        Line line = lineService.getLineById(id);
-        lineService.deleteLine(id);
-        LineResponse data = lineResponseMapper.toResponse(line);
+        Line line = service.getLineById(id);
+        service.deleteLine(id);
+        LineResponse data = responseMapper.toResponse(line);
 
         ApiResponse<LineResponse> apiResponse = ApiResponse.success(
                 data,

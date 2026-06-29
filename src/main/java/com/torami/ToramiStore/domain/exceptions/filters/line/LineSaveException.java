@@ -11,7 +11,4 @@ public class LineSaveException extends DomainException {
         super("Failed to save line with name '" + name + "': " + message, "LINE_SAVE_ERROR", 500, cause);
     }
 
-    public LineSaveException(String message) {
-        super("Failed to save line: " + message, "LINE_SAVE_ERROR", 500);
-    }
 }

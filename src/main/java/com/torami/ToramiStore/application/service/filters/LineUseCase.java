@@ -16,30 +16,36 @@ import java.util.List;
 @Validated
 public class LineUseCase implements ILineService {
 
-    private final ILineRepository lineRepository;
+    private final ILineRepository repository;
 
     @Override
     public Line getLineById(Integer id) {
         try {
-            return lineRepository.findById(id)
+            return repository.findById(id)
                     .orElseThrow(() -> new LineNotFoundException(id));
+
         } catch (LineNotFoundException e) {
             throw e;
+
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving line with ID " + id + ": " + e.getMessage(), e);
         }
+
     }
 
     @Override
     @Transactional
     public Line createLine(Line line) {
         try {
-            if (lineRepository.existsByName(line.getName())) {
+            if (repository.existsByName(line.getName())) {
                 throw new LineAlreadyExistsException(line.getName());
             }
-            return lineRepository.save(line);
+
+            return repository.save(line);
+
         } catch (LineAlreadyExistsException | LineInvalidNameException e) {
             throw e;
+
         } catch (Exception e) {
             throw new LineSaveException(line.getName(), e.getMessage(), e);
         }
@@ -48,7 +54,9 @@ public class LineUseCase implements ILineService {
     @Override
     public List<Line> getAllLines() {
         try {
-            return lineRepository.findAll();
+
+            return repository.findAll();
+
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving lines: " + e.getMessage(), e);
         }
@@ -59,12 +67,12 @@ public class LineUseCase implements ILineService {
     public Line updateLine(Integer id, Line line) {
         try {
             getLineById(id);
-            Line existingByName = lineRepository.findByName(line.getName());
+            Line existingByName = repository.findByName(line.getName());
             if (existingByName != null && !existingByName.getId().equals(id)) {
                 throw new LineAlreadyExistsException(line.getName());
             }
             Line lineToUpdate = new Line(id, line.getName());
-            return lineRepository.save(lineToUpdate);
+            return repository.save(lineToUpdate);
         } catch (LineNotFoundException | LineAlreadyExistsException | LineInvalidNameException e) {
             throw e;
         } catch (Exception e) {
@@ -78,26 +86,21 @@ public class LineUseCase implements ILineService {
         try {
             getLineById(id);
 
-            int figureCount = lineRepository.countFiguresByLineId(id);
+            int figureCount = repository.countFiguresByLineId(id);
             if (figureCount > 0) {
                 throw new LineHasFiguresException(id, figureCount);
             }
 
-            if (lineRepository.count() <= 1) {
+            if (repository.count() <= 1) {
                 throw new LineCannotBeDeletedException(id, "Cannot delete the only line");
             }
 
-            lineRepository.deleteLine(id);
+            repository.delete(id);
         } catch (LineNotFoundException | LineHasFiguresException | LineCannotBeDeletedException e) {
             throw e;
         } catch (Exception e) {
             throw new LineDeleteException(id, e.getMessage(), e);
         }
-    }
-
-    @Override
-    public boolean existsLine(Integer id) {
-        return false;
     }
 
 }

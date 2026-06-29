@@ -16,57 +16,52 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SerieJpaAdapter implements ISerieRepository {
 
-    private final SerieJpaRepository serieJpaRepository;
-    private final SerieMapper serieMapper;
+    private final SerieJpaRepository jpaRepository;
+    private final SerieMapper mapper;
 
     @Override
     public Optional<Serie> findById(Integer id) {
-        return serieJpaRepository.findById(id).map(serieMapper::toDomain);
+        return jpaRepository.findById(id).map(mapper::toDomain);
     }
 
     @Override
     public Serie save(Serie serie) {
-        SerieEntity serieEntity = serieMapper.toEntity(serie);
-        SerieEntity saveEntity = serieJpaRepository.save(serieEntity);
-        return serieMapper.toDomain(saveEntity);
+        SerieEntity serieEntity = mapper.toEntity(serie);
+        SerieEntity saveEntity = jpaRepository.save(serieEntity);
+        return mapper.toDomain(saveEntity);
     }
 
     @Override
     public List<Serie> findAll() {
-        return serieJpaRepository.findAll().stream()
-                .map(serieMapper::toDomain)
+        return jpaRepository.findAll().stream()
+                .map(mapper::toDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
     public void delete(Integer id) {
-        serieJpaRepository.deleteById(id);
-    }
-
-    @Override
-    public boolean existsById(Integer id) {
-        return serieJpaRepository.existsById(id);
+        jpaRepository.deleteById(id);
     }
 
     @Override
     public boolean existsByName(String name) {
-        return serieJpaRepository.existsByName(name);
+        return jpaRepository.existsByName(name);
     }
 
     @Override
     public Serie findByName(String name) {
-        return serieJpaRepository.findByName(name)
-                .map(serieMapper::toDomain)
+        return jpaRepository.findByName(name)
+                .map(mapper::toDomain)
                 .orElse(null);
     }
 
     @Override
     public int countFiguresBySerieId(Integer serieId) {
-        return serieJpaRepository.countFiguresBySerieId(serieId);
+        return jpaRepository.countFiguresBySerieId(serieId);
     }
 
     @Override
     public long count() {
-        return serieJpaRepository.count();
+        return jpaRepository.count();
     }
 }

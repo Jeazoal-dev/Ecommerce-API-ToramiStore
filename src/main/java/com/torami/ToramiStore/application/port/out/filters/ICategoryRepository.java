@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICategoryRepository {
+
     Category save(Category category);
+
+    Optional<Category> findById(Integer id);
 
     List<Category> findAll();
 
-    void deleteCategory(Integer id);
-
-    Optional<Category> findById(Integer id);
+    void delete(Integer id);
 
     boolean existsById(Integer id);
 

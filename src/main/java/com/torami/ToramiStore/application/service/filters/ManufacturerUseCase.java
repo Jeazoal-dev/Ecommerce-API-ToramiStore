@@ -13,18 +13,21 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ManufacturerUseCase implements IManufacturerService {
-    private final IManufacturerRepository manufacturerRepository;
+    private final IManufacturerRepository repository;
 
     @Override
     @Transactional
     public Manufacturer createManufacturer(Manufacturer manufacturer) {
         try {
-            if (manufacturerRepository.existsByName(manufacturer.getName())) {
+            if (repository.existsByName(manufacturer.getName())) {
                 throw new ManufacturerAlreadyExistsException(manufacturer.getName());
             }
-            return manufacturerRepository.save(manufacturer);
+
+            return repository.save(manufacturer);
+
         } catch (ManufacturerAlreadyExistsException | ManufacturerInvalidNameException e) {
             throw e;
+
         } catch (Exception e) {
             throw new ManufacturerSaveException(manufacturer.getName(), e.getMessage(), e);
         }
@@ -33,7 +36,8 @@ public class ManufacturerUseCase implements IManufacturerService {
     @Override
     public List<Manufacturer> getAllManufacturers() {
         try {
-            return manufacturerRepository.findAll();
+            return repository.findAll();
+
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving manufacturers: " + e.getMessage(), e);
         }
@@ -44,15 +48,17 @@ public class ManufacturerUseCase implements IManufacturerService {
     public Manufacturer updateManufacturer(Integer id, Manufacturer manufacturer) {
         try {
             getManufacturerById(id);
-            Manufacturer existingByName = manufacturerRepository.findByName(manufacturer.getName());
+            Manufacturer existingByName = repository.findByName(manufacturer.getName());
             if (existingByName != null && !existingByName.getId().equals(id)) {
                 throw new ManufacturerAlreadyExistsException(manufacturer.getName());
             }
             Manufacturer manufacturerToUpdate = new Manufacturer(id, manufacturer.getName());
-            return manufacturerRepository.save(manufacturerToUpdate);
+            return repository.save(manufacturerToUpdate);
+
         } catch (ManufacturerNotFoundException | ManufacturerAlreadyExistsException |
                  ManufacturerInvalidNameException e) {
             throw e;
+
         } catch (Exception e) {
             throw new ManufacturerSaveException(id, e.getMessage(), e);
         }
@@ -64,16 +70,17 @@ public class ManufacturerUseCase implements IManufacturerService {
         try {
             getManufacturerById(id);
 
-            int figureCount = manufacturerRepository.countFiguresByManufacturerId(id);
+            int figureCount = repository.countFiguresByManufacturerId(id);
             if (figureCount > 0) {
                 throw new ManufacturerHasFiguresException(id, figureCount);
             }
 
-            if (manufacturerRepository.count() <= 1) {
+            if (repository.count() <= 1) {
                 throw new ManufacturerCannotBeDeletedException(id, "Cannot delete the only manufacturer");
             }
 
-            manufacturerRepository.delete(id);
+            repository.delete(id);
+
         } catch (ManufacturerNotFoundException | ManufacturerHasFiguresException |
                  ManufacturerCannotBeDeletedException e) {
             throw e;
@@ -85,10 +92,12 @@ public class ManufacturerUseCase implements IManufacturerService {
     @Override
     public Manufacturer getManufacturerById(Integer id) {
         try {
-            return manufacturerRepository.findById(id)
+            return repository.findById(id)
                     .orElseThrow(() -> new ManufacturerNotFoundException(id));
+
         } catch (ManufacturerNotFoundException e) {
             throw e;
+
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving manufacturer with ID " + id + ": " + e.getMessage(), e);
         }

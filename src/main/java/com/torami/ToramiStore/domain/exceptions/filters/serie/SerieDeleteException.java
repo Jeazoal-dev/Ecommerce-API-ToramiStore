@@ -8,7 +8,4 @@ public class SerieDeleteException extends DomainException {
         super("Failed to delete serie with ID " + serieId + ": " + message, "SERIE_DELETE_ERROR", 500, cause);
     }
 
-    public SerieDeleteException(Integer serieId, String message) {
-        super("Failed to delete serie with ID " + serieId + ": " + message, "SERIE_DELETE_ERROR", 500);
-    }
 }

@@ -14,9 +14,7 @@ public interface ISerieRepository {
     List<Serie> findAll();
 
     void delete(Integer id);
-
-    boolean existsById(Integer id);
-
+    
     boolean existsByName(String name);
 
     Serie findByName(String name);

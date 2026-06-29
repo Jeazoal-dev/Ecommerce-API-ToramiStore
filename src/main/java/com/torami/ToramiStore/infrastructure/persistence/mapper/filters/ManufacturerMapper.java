@@ -17,5 +17,4 @@ public class ManufacturerMapper {
         entity.setName(manufacturer.getName());
         return entity;
     }
-
 }

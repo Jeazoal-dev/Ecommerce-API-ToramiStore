@@ -16,18 +16,21 @@ import java.util.List;
 @Validated
 public class SerieUseCase implements ISerieService {
 
-    private final ISerieRepository serieRepository;
+    private final ISerieRepository repository;
 
     @Override
     @Transactional
     public Serie createSerie(Serie serie) {
         try {
-            if (serieRepository.existsByName(serie.getName())) {
+            if (repository.existsByName(serie.getName())) {
                 throw new SerieAlreadyExistsException(serie.getName());
             }
-            return serieRepository.save(serie);
+
+            return repository.save(serie);
+
         } catch (SerieAlreadyExistsException | SerieInvalidNameException e) {
             throw e;
+
         } catch (Exception e) {
             throw new SerieSaveException(serie.getName(), e.getMessage(), e);
         }
@@ -36,7 +39,8 @@ public class SerieUseCase implements ISerieService {
     @Override
     public List<Serie> getAllSeries() {
         try {
-            return serieRepository.findAll();
+            return repository.findAll();
+
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving series: " + e.getMessage(), e);
         }
@@ -47,14 +51,17 @@ public class SerieUseCase implements ISerieService {
     public Serie updateSerie(Integer id, Serie serie) {
         try {
             getSerieById(id);
-            Serie existingByName = serieRepository.findByName(serie.getName());
+            Serie existingByName = repository.findByName(serie.getName());
             if (existingByName != null && !existingByName.getId().equals(id)) {
                 throw new SerieAlreadyExistsException(serie.getName());
             }
+
             Serie serieToUpdate = new Serie(id, serie.getName());
-            return serieRepository.save(serieToUpdate);
+            return repository.save(serieToUpdate);
+
         } catch (SerieNotFoundException | SerieAlreadyExistsException | SerieInvalidNameException e) {
             throw e;
+
         } catch (Exception e) {
             throw new SerieSaveException(id, e.getMessage(), e);
         }
@@ -66,18 +73,20 @@ public class SerieUseCase implements ISerieService {
         try {
             getSerieById(id);
 
-            int figureCount = serieRepository.countFiguresBySerieId(id);
+            int figureCount = repository.countFiguresBySerieId(id);
             if (figureCount > 0) {
                 throw new SerieHasFiguresException(id, figureCount);
             }
 
-            if (serieRepository.count() <= 1) {
+            if (repository.count() <= 1) {
                 throw new SerieCannotBeDeletedException(id, "Cannot delete the only serie");
             }
 
-            serieRepository.delete(id);
+            repository.delete(id);
+
         } catch (SerieNotFoundException | SerieHasFiguresException | SerieCannotBeDeletedException e) {
             throw e;
+
         } catch (Exception e) {
             throw new SerieDeleteException(id, e.getMessage(), e);
         }
@@ -86,10 +95,12 @@ public class SerieUseCase implements ISerieService {
     @Override
     public Serie getSerieById(Integer id) {
         try {
-            return serieRepository.findById(id)
+            return repository.findById(id)
                     .orElseThrow(() -> new SerieNotFoundException(id));
+
         } catch (SerieNotFoundException e) {
             throw e;
+
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving serie with ID " + id + ": " + e.getMessage(), e);
         }

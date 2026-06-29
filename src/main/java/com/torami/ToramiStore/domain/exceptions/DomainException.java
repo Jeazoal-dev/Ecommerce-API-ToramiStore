@@ -19,4 +19,5 @@ public abstract class DomainException extends RuntimeException {
         this.errorCode = errorCode;
         this.httpStatus = httpStatus;
     }
+
 }

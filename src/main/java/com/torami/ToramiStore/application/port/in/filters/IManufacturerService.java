@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface IManufacturerService {
 
-    Manufacturer createManufacturer(Manufacturer manufacturer);
+    Manufacturer getManufacturerById(@Min(1) Integer id);
 
     List<Manufacturer> getAllManufacturers();
 
-    Manufacturer getManufacturerById(@Min(1) Integer id);
+    Manufacturer createManufacturer(Manufacturer manufacturer);
 
     Manufacturer updateManufacturer(@Min(1) Integer id, Manufacturer manufacturer);
 

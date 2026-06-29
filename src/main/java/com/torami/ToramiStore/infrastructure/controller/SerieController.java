@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/Serie")
+@RequestMapping("/serie")
 @RequiredArgsConstructor
 public class SerieController {
 
-    private final ISerieService serieService;
-    private final SerieResponseMapper serieResponseMapper;
+    private final ISerieService service;
+    private final SerieResponseMapper responseMapper;
 
     @PostMapping
     public ResponseEntity<ApiResponse<SerieResponse>> createSerie(
@@ -31,8 +31,8 @@ public class SerieController {
             HttpServletRequest httpRequest) {
 
         Serie serie = new Serie(request.getName());
-        Serie saved = serieService.createSerie(serie);
-        SerieResponse data = serieResponseMapper.toResponse(saved);
+        Serie saved = service.createSerie(serie);
+        SerieResponse data = responseMapper.toResponse(saved);
 
         ApiResponse<SerieResponse> apiResponse = ApiResponse.created(
                 data,
@@ -47,9 +47,9 @@ public class SerieController {
     public ResponseEntity<ApiResponse<List<SerieResponse>>> getAllSeries(
             HttpServletRequest request) {
 
-        List<Serie> series = serieService.getAllSeries();
+        List<Serie> series = service.getAllSeries();
         List<SerieResponse> data = series.stream()
-                .map(serieResponseMapper::toResponse)
+                .map(responseMapper::toResponse)
                 .collect(Collectors.toList());
 
         ApiResponse<List<SerieResponse>> apiResponse = ApiResponse.success(
@@ -66,8 +66,8 @@ public class SerieController {
             @PathVariable Integer id,
             HttpServletRequest request) {
 
-        Serie serie = serieService.getSerieById(id);
-        SerieResponse data = serieResponseMapper.toResponse(serie);
+        Serie serie = service.getSerieById(id);
+        SerieResponse data = responseMapper.toResponse(serie);
 
         ApiResponse<SerieResponse> apiResponse = ApiResponse.success(
                 data,
@@ -85,8 +85,8 @@ public class SerieController {
             HttpServletRequest httpRequest) {
 
         Serie serie = new Serie(request.getName());
-        Serie updated = serieService.updateSerie(id, serie);
-        SerieResponse data = serieResponseMapper.toResponse(updated);
+        Serie updated = service.updateSerie(id, serie);
+        SerieResponse data = responseMapper.toResponse(updated);
 
         ApiResponse<SerieResponse> apiResponse = ApiResponse.success(
                 data,
@@ -102,9 +102,9 @@ public class SerieController {
             @PathVariable Integer id,
             HttpServletRequest request) {
 
-        Serie serie = serieService.getSerieById(id);
-        serieService.deleteSerie(id);
-        SerieResponse data = serieResponseMapper.toResponse(serie);
+        Serie serie = service.getSerieById(id);
+        service.deleteSerie(id);
+        SerieResponse data = responseMapper.toResponse(serie);
 
         ApiResponse<SerieResponse> apiResponse = ApiResponse.success(
                 data,

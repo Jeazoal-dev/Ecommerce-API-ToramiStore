@@ -18,18 +18,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/category")
 @RequiredArgsConstructor
 public class CategoryController {
 
-    private final ICategoryService categoryService;
-    private final CategoryResponseMapper categoryResponseMapper;
+    private final ICategoryService service;
+    private final CategoryResponseMapper responseMapper;
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<CategoryResponse>>> getAllCategories(HttpServletRequest request) {
-        List<Category> categories = categoryService.getAllCategories();
+        List<Category> categories = service.getAllCategories();
         List<CategoryResponse> data = categories.stream()
-                .map(categoryResponseMapper::toResponse)
+                .map(responseMapper::toResponse)
                 .collect(Collectors.toList());
 
         ApiResponse<List<CategoryResponse>> apiResponse = ApiResponse.success(
@@ -39,7 +39,6 @@ public class CategoryController {
         );
 
         return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
-
     }
 
     @GetMapping("/{id}")
@@ -47,8 +46,8 @@ public class CategoryController {
             @PathVariable Integer id,
             HttpServletRequest request) {
 
-        Category saved = categoryService.getCategoryById(id);
-        CategoryResponse data = categoryResponseMapper.toResponse(saved);
+        Category saved = service.getCategoryById(id);
+        CategoryResponse data = responseMapper.toResponse(saved);
 
         ApiResponse<CategoryResponse> apiResponse = ApiResponse.success(
                 data,
@@ -65,8 +64,8 @@ public class CategoryController {
             HttpServletRequest httpRequest) {
 
         Category category = new Category(request.getName());
-        Category saved = categoryService.createCategory(category);
-        CategoryResponse data = categoryResponseMapper.toResponse(saved);
+        Category saved = service.createCategory(category);
+        CategoryResponse data = responseMapper.toResponse(saved);
 
         ApiResponse<CategoryResponse> apiResponse = ApiResponse.created(
                 data,
@@ -75,7 +74,6 @@ public class CategoryController {
         );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(apiResponse);
-
     }
 
     @PutMapping("/{id}")
@@ -84,8 +82,8 @@ public class CategoryController {
             HttpServletRequest httpRequest) {
 
         Category category = new Category(request.getName());
-        Category saved = categoryService.updateCategory(id, category);
-        CategoryResponse data = categoryResponseMapper.toResponse(saved);
+        Category saved = service.updateCategory(id, category);
+        CategoryResponse data = responseMapper.toResponse(saved);
 
         ApiResponse<CategoryResponse> apiResponse = ApiResponse.success(
                 data,
@@ -101,9 +99,9 @@ public class CategoryController {
             @PathVariable Integer id,
             HttpServletRequest httpRequest) {
 
-        Category category = categoryService.getCategoryById(id);
-        CategoryResponse data = categoryResponseMapper.toResponse(category);
-        categoryService.deleteCategory(id);
+        Category category = service.getCategoryById(id);
+        CategoryResponse data = responseMapper.toResponse(category);
+        service.deleteCategory(id);
 
         ApiResponse<CategoryResponse> apiResponse = ApiResponse.success(
                 data,

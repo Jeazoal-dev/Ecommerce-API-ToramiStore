@@ -16,30 +16,33 @@ import java.util.List;
 @Validated
 public class CategoryUseCase implements ICategoryService {
 
-    private final ICategoryRepository categoryRepository;
+    private final ICategoryRepository repository;
 
     @Override
     @Transactional
     public Category createCategory(Category category) {
         try {
-
-            if (categoryRepository.existsByName(category.getName())) {
+            if (repository.existsByName(category.getName())) {
                 throw new CategoryAlreadyExistsException(category.getName());
             }
-            return categoryRepository.save(category);
+
+            return repository.save(category);
 
         } catch (CategoryAlreadyExistsException | CategoryInvalidNameException e) {
             throw e;
+
         } catch (Exception e) {
             throw new CategorySaveException(category.getName(), e.getMessage(), e);
         }
+
     }
 
 
     @Override
     public List<Category> getAllCategories() {
         try {
-            return categoryRepository.findAll();
+            return repository.findAll();
+
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving categories: " + e.getMessage(), e);
         }
@@ -50,18 +53,22 @@ public class CategoryUseCase implements ICategoryService {
     public Category updateCategory(Integer id, Category category) {
         try {
             getCategoryById(id);
-            Category existingByName = categoryRepository.findByName(category.getName());
+            Category existingByName = repository.findByName(category.getName());
 
             if (existingByName != null && !existingByName.getId().equals(id)) {
                 throw new CategoryAlreadyExistsException(category.getName());
             }
+
             Category categoryToUpdate = new Category(id, category.getName());
-            return categoryRepository.save(categoryToUpdate);
+            return repository.save(categoryToUpdate);
+
         } catch (CategoryNotFoundException | CategoryAlreadyExistsException | CategoryInvalidNameException e) {
             throw e;
+
         } catch (Exception e) {
             throw new CategorySaveException(id, e.getMessage(), e);
         }
+
     }
 
     @Override
@@ -70,37 +77,39 @@ public class CategoryUseCase implements ICategoryService {
         try {
             Category category = getCategoryById(id);
 
-            int figureCount = categoryRepository.countFiguresByCategoryId(id);
+            int figureCount = repository.countFiguresByCategoryId(id);
             if (figureCount > 0) {
                 throw new CategoryHasFiguresException(id, figureCount);
             }
 
-            if (categoryRepository.count() <= 1) {
+            if (repository.count() <= 1) {
                 throw new CategoryCannotBeDeletedException(id, "Cannot delete the only category");
             }
 
-            categoryRepository.deleteCategory(id);
+            repository.delete(id);
+
         } catch (CategoryNotFoundException | CategoryHasFiguresException | CategoryCannotBeDeletedException e) {
             throw e;
+
         } catch (Exception e) {
             throw new CategoryDeleteException(id, e.getMessage(), e);
         }
+
     }
 
     @Override
     public Category getCategoryById(Integer id) {
         try {
-            return categoryRepository.findById(id)
+            return repository.findById(id)
                     .orElseThrow(() -> new CategoryNotFoundException(id));
+
         } catch (CategoryNotFoundException e) {
             throw e;
+
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving category with ID " + id + ": " + e.getMessage(), e);
         }
+
     }
 
-    @Override
-    public boolean existsCategory(Integer id) {
-        return categoryRepository.existsById(id);
-    }
 }

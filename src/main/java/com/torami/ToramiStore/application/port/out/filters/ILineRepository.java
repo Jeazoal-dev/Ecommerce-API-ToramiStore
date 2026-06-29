@@ -6,15 +6,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ILineRepository {
+
+    Line save(Line line);
+
     Optional<Line> findById(Integer id);
 
     List<Line> findAll();
 
-    void deleteLine(Integer id);
-
-    Line save(Line line);
-
-    boolean existsById(Integer id);
+    void delete(Integer id);
 
     boolean existsByName(String name);
 

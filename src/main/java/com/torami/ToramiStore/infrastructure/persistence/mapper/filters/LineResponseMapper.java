@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LineResponseMapper {
+
     public LineResponse toResponse(Line line) {
         return new LineResponse(
                 line.getId(),

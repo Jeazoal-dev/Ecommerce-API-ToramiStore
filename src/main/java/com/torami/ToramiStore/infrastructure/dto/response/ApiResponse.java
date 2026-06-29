@@ -46,19 +46,14 @@ public class ApiResponse<T> {
         this.path = path;
     }
 
-    // ===== MÉTODOS FACTORY =====
-
-    // 200 OK
     public static <T> ApiResponse<T> success(T data, String message, String path) {
         return new ApiResponse<>(200, message, data, path);
     }
 
-    // 201 CREATED
     public static <T> ApiResponse<T> created(T data, String message, String path) {
         return new ApiResponse<>(201, message, data, path);
     }
 
-    // 204 NO CONTENT
     public static <T> ApiResponse<T> noContent(String message, String path) {
         return new ApiResponse<>(204, message, path);
     }

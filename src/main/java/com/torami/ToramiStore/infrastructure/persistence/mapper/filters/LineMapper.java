@@ -17,5 +17,4 @@ public class LineMapper {
         entity.setName(line.getName());
         return entity;
     }
-
 }

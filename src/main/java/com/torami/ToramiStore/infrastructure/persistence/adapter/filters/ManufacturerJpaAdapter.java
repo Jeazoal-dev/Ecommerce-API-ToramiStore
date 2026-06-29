@@ -15,57 +15,53 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class ManufacturerJpaAdapter implements IManufacturerRepository {
-    private final ManufacturerJpaRepository manufacturerJpaRepository;
-    private final ManufacturerMapper manufacturerMapper;
+
+    private final ManufacturerJpaRepository jpaRepository;
+    private final ManufacturerMapper mapper;
 
     @Override
     public Manufacturer save(Manufacturer manufacturer) {
-        ManufacturerEntity manufacturerEntity = manufacturerMapper.toEntity(manufacturer);
-        ManufacturerEntity savedEntity = manufacturerJpaRepository.save(manufacturerEntity);
-        return manufacturerMapper.toDomain(savedEntity);
+        ManufacturerEntity manufacturerEntity = mapper.toEntity(manufacturer);
+        ManufacturerEntity savedEntity = jpaRepository.save(manufacturerEntity);
+        return mapper.toDomain(savedEntity);
     }
 
     @Override
     public Optional<Manufacturer> findById(Integer id) {
-        return manufacturerJpaRepository.findById(id).map(manufacturerMapper::toDomain);
+        return jpaRepository.findById(id).map(mapper::toDomain);
     }
 
     @Override
     public List<Manufacturer> findAll() {
-        return manufacturerJpaRepository.findAll().stream()
-                .map(manufacturerMapper::toDomain)
+        return jpaRepository.findAll().stream()
+                .map(mapper::toDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
     public void delete(Integer id) {
-        manufacturerJpaRepository.deleteById(id);
-    }
-
-    @Override
-    public boolean existsById(Integer id) {
-        return manufacturerJpaRepository.existsById(id);
+        jpaRepository.deleteById(id);
     }
 
     @Override
     public boolean existsByName(String name) {
-        return manufacturerJpaRepository.existsByName(name);
+        return jpaRepository.existsByName(name);
     }
 
     @Override
     public Manufacturer findByName(String name) {
-        return manufacturerJpaRepository.findByName(name)
-                .map(manufacturerMapper::toDomain)
+        return jpaRepository.findByName(name)
+                .map(mapper::toDomain)
                 .orElse(null);
     }
 
     @Override
     public int countFiguresByManufacturerId(Integer manufacturerId) {
-        return manufacturerJpaRepository.countFiguresByManufacturerId(manufacturerId);
+        return jpaRepository.countFiguresByManufacturerId(manufacturerId);
     }
 
     @Override
     public long count() {
-        return manufacturerJpaRepository.count();
+        return jpaRepository.count();
     }
 }

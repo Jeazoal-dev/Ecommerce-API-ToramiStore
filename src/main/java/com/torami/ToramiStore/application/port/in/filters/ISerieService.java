@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface ISerieService {
 
-    Serie createSerie(Serie serie);
+    Serie getSerieById(@Min(1) Integer id);
 
     List<Serie> getAllSeries();
 
-    Serie getSerieById(@Min(1) Integer id);
+    Serie createSerie(Serie serie);
 
     Serie updateSerie(@Min(1) Integer id, Serie serie);
 

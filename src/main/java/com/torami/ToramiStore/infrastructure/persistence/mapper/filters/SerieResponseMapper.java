@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SerieResponseMapper {
+
     public SerieResponse toResponse(Serie serie) {
         return new SerieResponse(
                 serie.getId(),
