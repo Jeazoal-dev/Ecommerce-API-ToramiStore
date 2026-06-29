@@ -12,6 +12,8 @@ import com.torami.ToramiStore.domain.models.filters.Manufacturer;
 import com.torami.ToramiStore.domain.models.filters.Serie;
 import com.torami.ToramiStore.domain.models.products.Figure;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,5 +48,24 @@ public class FiguraUseCase implements IFigureService {
     @Override
     public Figure getFigureById(Integer id) {
         return figureRepository.findById(id).orElseThrow(() -> new RuntimeException("Figura no encontrada"));
+    }
+
+    @Override
+    public Page<Figure> getAllFigures(Pageable pageable) {
+        return figureRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Figure> searchFigures(String keyword, Integer categoryId, Integer manufacturerId, Integer lineId, Integer serieId, Double minPrice, Double maxPrice, Boolean inStock, Pageable pageable) {
+        return figureRepository.searchFigures(keyword,
+                categoryId,
+                manufacturerId,
+                lineId,
+                serieId,
+                minPrice,
+                maxPrice,
+                inStock,
+                pageable
+        );
     }
 }

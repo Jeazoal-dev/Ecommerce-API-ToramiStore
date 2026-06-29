@@ -6,6 +6,8 @@ import com.torami.ToramiStore.infrastructure.persistence.entity.products.FigureE
 import com.torami.ToramiStore.infrastructure.persistence.mapper.products.FigureMapper;
 import com.torami.ToramiStore.infrastructure.persistence.repository.products.FigureJpaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -28,4 +30,26 @@ public class FigureJpaAdapter implements IFigureRepository {
     public Optional<Figure> findById(Integer id) {
         return jpaRepository.findById(id).map(mapper::toDomain);
     }
+
+    @Override
+    public Page<Figure> findAll(Pageable pageable) {
+        return jpaRepository.findAll(pageable).map(mapper::toDomain);
+    }
+
+    @Override
+    public Page<Figure> searchFigures(String keyword, Integer categoryId, Integer manufacturerId, Integer lineId, Integer serieId, Double minPrice, Double maxPrice, Boolean inStock, Pageable pageable) {
+        return jpaRepository.searchFigures(
+                keyword,
+                categoryId,
+                manufacturerId,
+                lineId,
+                serieId,
+                minPrice,
+                maxPrice,
+                inStock,
+                pageable
+        ).map(mapper::toDomain);
+    }
+
+
 }
