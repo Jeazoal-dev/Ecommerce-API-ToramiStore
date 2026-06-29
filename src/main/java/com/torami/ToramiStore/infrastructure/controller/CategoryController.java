@@ -2,8 +2,8 @@ package com.torami.ToramiStore.infrastructure.controller;
 
 import com.torami.ToramiStore.application.port.in.filters.ICategoryService;
 import com.torami.ToramiStore.domain.models.filters.Category;
-import com.torami.ToramiStore.infrastructure.dto.request.filters.Category.CreateCategoryRequest;
-import com.torami.ToramiStore.infrastructure.dto.request.filters.Category.UpdateCategoryRequest;
+import com.torami.ToramiStore.infrastructure.dto.request.filters.category.CreateCategoryRequest;
+import com.torami.ToramiStore.infrastructure.dto.request.filters.category.UpdateCategoryRequest;
 import com.torami.ToramiStore.infrastructure.dto.response.ApiResponse;
 import com.torami.ToramiStore.infrastructure.dto.response.filters.CategoryResponse;
 import com.torami.ToramiStore.infrastructure.persistence.mapper.filters.CategoryResponseMapper;
