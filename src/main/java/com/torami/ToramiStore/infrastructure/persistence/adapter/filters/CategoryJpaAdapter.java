@@ -50,4 +50,26 @@ public class CategoryJpaAdapter implements ICategoryRepository {
         return categoryJpaRepository.existsById(id);
     }
 
+    @Override
+    public boolean existsByName(String name) {
+        return categoryJpaRepository.existsByName(name);
+    }
+
+    @Override
+    public Category findByName(String name) {
+        return categoryJpaRepository.findByName(name)
+                .map(categoryMapper::toDomain)
+                .orElse(null);
+    }
+
+    @Override
+    public int countFiguresByCategoryId(Integer categoryId) {
+        return categoryJpaRepository.countFiguresByCategoryId(categoryId);
+    }
+
+    @Override
+    public long count() {
+        return categoryJpaRepository.count();
+    }
+
 }

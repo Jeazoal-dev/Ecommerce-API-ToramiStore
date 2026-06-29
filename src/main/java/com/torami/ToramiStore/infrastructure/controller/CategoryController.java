@@ -2,10 +2,13 @@ package com.torami.ToramiStore.infrastructure.controller;
 
 import com.torami.ToramiStore.application.port.in.filters.ICategoryService;
 import com.torami.ToramiStore.domain.models.filters.Category;
-import com.torami.ToramiStore.infrastructure.dto.request.filters.CreateCategoryRequest;
-import com.torami.ToramiStore.infrastructure.dto.request.filters.UpdateCategoryRequest;
+import com.torami.ToramiStore.infrastructure.dto.request.filters.Category.CreateCategoryRequest;
+import com.torami.ToramiStore.infrastructure.dto.request.filters.Category.UpdateCategoryRequest;
+import com.torami.ToramiStore.infrastructure.dto.response.ApiResponse;
 import com.torami.ToramiStore.infrastructure.dto.response.filters.CategoryResponse;
 import com.torami.ToramiStore.infrastructure.persistence.mapper.filters.CategoryResponseMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,43 +26,92 @@ public class CategoryController {
     private final CategoryResponseMapper categoryResponseMapper;
 
     @GetMapping
-    public ResponseEntity<List<CategoryResponse>> getAllCategories() {
+    public ResponseEntity<ApiResponse<List<CategoryResponse>>> getAllCategories(HttpServletRequest request) {
         List<Category> categories = categoryService.getAllCategories();
-        List<CategoryResponse> response = categories.stream()
+        List<CategoryResponse> data = categories.stream()
                 .map(categoryResponseMapper::toResponse)
                 .collect(Collectors.toList());
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+
+        ApiResponse<List<CategoryResponse>> apiResponse = ApiResponse.success(
+                data,
+                "Categories retrieved successfully",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable Integer id) {
+    public ResponseEntity<ApiResponse<CategoryResponse>> getCategoryById(
+            @PathVariable Integer id,
+            HttpServletRequest request) {
+
         Category saved = categoryService.getCategoryById(id);
-        CategoryResponse response = categoryResponseMapper.toResponse(saved);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        CategoryResponse data = categoryResponseMapper.toResponse(saved);
+
+        ApiResponse<CategoryResponse> apiResponse = ApiResponse.success(
+                data,
+                "Category retrieved successfully",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
     @PostMapping
-    public ResponseEntity<CategoryResponse> createCategory(@RequestBody CreateCategoryRequest request) {
+    public ResponseEntity<ApiResponse<CategoryResponse>> createCategory(
+            @Valid @RequestBody CreateCategoryRequest request,
+            HttpServletRequest httpRequest) {
+
         Category category = new Category(request.getName());
         Category saved = categoryService.createCategory(category);
-        CategoryResponse response = categoryResponseMapper.toResponse(saved);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        CategoryResponse data = categoryResponseMapper.toResponse(saved);
+
+        ApiResponse<CategoryResponse> apiResponse = ApiResponse.created(
+                data,
+                "Category created successfully",
+                httpRequest.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(apiResponse);
+
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryResponse> updateCategory(@PathVariable Integer id, @RequestBody UpdateCategoryRequest request) {
+    public ResponseEntity<ApiResponse<CategoryResponse>> updateCategory(
+            @PathVariable Integer id, @Valid @RequestBody UpdateCategoryRequest request,
+            HttpServletRequest httpRequest) {
+
         Category category = new Category(request.getName());
         Category saved = categoryService.updateCategory(id, category);
-        CategoryResponse response = categoryResponseMapper.toResponse(saved);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        CategoryResponse data = categoryResponseMapper.toResponse(saved);
+
+        ApiResponse<CategoryResponse> apiResponse = ApiResponse.success(
+                data,
+                "Category update successfully",
+                httpRequest.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CategoryResponse> deleteCategory(@PathVariable Integer id) {
+    public ResponseEntity<ApiResponse<CategoryResponse>> deleteCategory(
+            @PathVariable Integer id,
+            HttpServletRequest httpRequest) {
+
         Category category = categoryService.getCategoryById(id);
+        CategoryResponse data = categoryResponseMapper.toResponse(category);
         categoryService.deleteCategory(id);
-        CategoryResponse response = categoryResponseMapper.toResponse(category);
-        return ResponseEntity.ok(response);
+
+        ApiResponse<CategoryResponse> apiResponse = ApiResponse.success(
+                data,
+                "Category deleted successfully",
+                httpRequest.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
     }
 
 }

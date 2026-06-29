@@ -1,6 +1,7 @@
 package com.torami.ToramiStore.application.port.in.filters;
 
 import com.torami.ToramiStore.domain.models.filters.Category;
+import jakarta.validation.constraints.Min;
 
 import java.util.List;
 
@@ -9,11 +10,11 @@ public interface ICategoryService {
 
     List<Category> getAllCategories();
 
-    Category updateCategory(Integer id, Category category);
+    Category updateCategory(@Min(1) Integer id, Category category);
 
-    void deleteCategory(Integer id);
+    void deleteCategory(@Min(1) Integer id);
 
-    Category getCategoryById(Integer id);
+    Category getCategoryById(@Min(1) Integer id);
 
     boolean existsCategory(Integer id);
 }

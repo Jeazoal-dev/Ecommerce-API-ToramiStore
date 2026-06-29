@@ -15,4 +15,13 @@ public interface ICategoryRepository {
     Optional<Category> findById(Integer id);
 
     boolean existsById(Integer id);
+
+    boolean existsByName(String name);
+
+    Category findByName(String name);
+
+    int countFiguresByCategoryId(Integer categoryId);
+
+    long count();
+
 }

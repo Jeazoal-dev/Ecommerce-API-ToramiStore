@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.domain.exceptions.filters;
+package com.torami.ToramiStore.domain.exceptions.filters.Line;
 
 public class LineNotFoundException extends RuntimeException {
 

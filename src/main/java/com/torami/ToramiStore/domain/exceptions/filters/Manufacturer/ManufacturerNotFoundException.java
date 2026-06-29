@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.domain.exceptions.filters;
+package com.torami.ToramiStore.domain.exceptions.filters.Manufacturer;
 
 public class ManufacturerNotFoundException extends RuntimeException {
 
