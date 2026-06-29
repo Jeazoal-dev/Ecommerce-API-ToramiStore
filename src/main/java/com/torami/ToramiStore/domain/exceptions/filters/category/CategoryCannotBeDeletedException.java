@@ -1,27 +1,9 @@
 package com.torami.ToramiStore.domain.exceptions.filters.category;
 
-public class CategoryCannotBeDeletedException extends RuntimeException {
+import com.torami.ToramiStore.domain.exceptions.DomainException;
 
-    private final Integer categoryId;
-    private final String reason;
-    private final String errorCode = "CATEGORY_CANNOT_BE_DELETED";
-
+public class CategoryCannotBeDeletedException extends DomainException {
     public CategoryCannotBeDeletedException(Integer categoryId, String reason) {
-        super("Category with ID " + categoryId + " cannot be deleted: " + reason);
-        this.categoryId = categoryId;
-        this.reason = reason;
+        super("Category with ID " + categoryId + " cannot be deleted: " + reason, "CATEGORY_CANNOT_BE_DELETED", 400);
     }
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public String getErrorCode() {
-        return errorCode;
-    }
-
 }

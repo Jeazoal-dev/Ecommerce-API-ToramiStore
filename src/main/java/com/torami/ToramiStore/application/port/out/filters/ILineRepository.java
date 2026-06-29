@@ -15,4 +15,12 @@ public interface ILineRepository {
     Line save(Line line);
 
     boolean existsById(Integer id);
+
+    boolean existsByName(String name);
+
+    Line findByName(String name);
+
+    int countFiguresByLineId(Integer lineId);
+
+    long count();
 }

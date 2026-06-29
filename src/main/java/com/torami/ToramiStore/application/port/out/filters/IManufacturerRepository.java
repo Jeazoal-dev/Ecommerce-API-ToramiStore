@@ -14,4 +14,14 @@ public interface IManufacturerRepository {
     List<Manufacturer> findAll();
 
     void delete(Integer id);
+
+    boolean existsById(Integer id);
+
+    boolean existsByName(String name);
+
+    Manufacturer findByName(String name);
+
+    int countFiguresByManufacturerId(Integer manufacturerId);
+
+    long count();
 }

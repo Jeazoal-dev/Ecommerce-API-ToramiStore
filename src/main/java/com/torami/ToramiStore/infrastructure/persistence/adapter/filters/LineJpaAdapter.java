@@ -47,4 +47,26 @@ public class LineJpaAdapter implements ILineRepository {
     public boolean existsById(Integer id) {
         return lineJpaRepository.existsById(id);
     }
+
+    @Override
+    public boolean existsByName(String name) {
+        return lineJpaRepository.existsByName(name);
+    }
+
+    @Override
+    public Line findByName(String name) {
+        return lineJpaRepository.findByName(name)
+                .map(lineMapper::toDomain)
+                .orElse(null);
+    }
+
+    @Override
+    public int countFiguresByLineId(Integer lineId) {
+        return lineJpaRepository.countFiguresByLineId(lineId);
+    }
+
+    @Override
+    public long count() {
+        return lineJpaRepository.count();
+    }
 }

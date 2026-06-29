@@ -1,6 +1,7 @@
 package com.torami.ToramiStore.application.port.in.filters;
 
 import com.torami.ToramiStore.domain.models.filters.Line;
+import jakarta.validation.constraints.Min;
 
 import java.util.List;
 
@@ -11,9 +12,9 @@ public interface ILineService {
 
     List<Line> getAllLines();
 
-    Line updateLine(Integer id, Line line);
+    Line updateLine(@Min(1) Integer id, Line line);
 
-    void deleteLine(Integer id);
+    void deleteLine(@Min(1) Integer id);
 
-    boolean existsLine(Integer id);
+    boolean existsLine(@Min(1) Integer id);
 }

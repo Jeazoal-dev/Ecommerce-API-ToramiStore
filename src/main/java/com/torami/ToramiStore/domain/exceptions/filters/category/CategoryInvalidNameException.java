@@ -1,26 +1,9 @@
 package com.torami.ToramiStore.domain.exceptions.filters.category;
 
-public class CategoryInvalidNameException extends RuntimeException {
+import com.torami.ToramiStore.domain.exceptions.DomainException;
 
-    private final String name;
-    private final String reason;
-    private final String errorCode = "CATEGORY_INVALID_NAME";
-
+public class CategoryInvalidNameException extends DomainException {
     public CategoryInvalidNameException(String name, String reason) {
-        super("Category name '" + name + "' is invalid: " + reason);
-        this.name = name;
-        this.reason = reason;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public String getErrorCode() {
-        return errorCode;
+        super("Category name '" + name + "' is invalid: " + reason, "CATEGORY_INVALID_NAME", 400);
     }
 }

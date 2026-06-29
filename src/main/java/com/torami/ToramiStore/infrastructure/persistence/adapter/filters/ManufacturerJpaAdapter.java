@@ -41,4 +41,31 @@ public class ManufacturerJpaAdapter implements IManufacturerRepository {
     public void delete(Integer id) {
         manufacturerJpaRepository.deleteById(id);
     }
+
+    @Override
+    public boolean existsById(Integer id) {
+        return manufacturerJpaRepository.existsById(id);
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return manufacturerJpaRepository.existsByName(name);
+    }
+
+    @Override
+    public Manufacturer findByName(String name) {
+        return manufacturerJpaRepository.findByName(name)
+                .map(manufacturerMapper::toDomain)
+                .orElse(null);
+    }
+
+    @Override
+    public int countFiguresByManufacturerId(Integer manufacturerId) {
+        return manufacturerJpaRepository.countFiguresByManufacturerId(manufacturerId);
+    }
+
+    @Override
+    public long count() {
+        return manufacturerJpaRepository.count();
+    }
 }

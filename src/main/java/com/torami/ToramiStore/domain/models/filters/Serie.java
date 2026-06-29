@@ -1,22 +1,30 @@
 package com.torami.ToramiStore.domain.models.filters;
 
-import lombok.AllArgsConstructor;
+import com.torami.ToramiStore.domain.exceptions.filters.serie.SerieInvalidNameException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Serie {
     private Integer id;
     private String name;
 
     public Serie(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Serie name cannot be empty");
+            throw new SerieInvalidNameException(name, "cannot be empty");
         }
-
-        this.name = name;
+        if (name.length() < 3) {
+            throw new SerieInvalidNameException(name, "must have at least 3 characters");
+        }
+        if (name.length() > 100) {
+            throw new SerieInvalidNameException(name, "cannot exceed 100 characters");
+        }
+        this.name = name.trim();
     }
 
+    public Serie(Integer id, String name) {
+        this(name);
+        this.id = id;
+    }
 }

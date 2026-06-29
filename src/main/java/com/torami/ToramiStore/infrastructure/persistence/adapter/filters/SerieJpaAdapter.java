@@ -42,4 +42,31 @@ public class SerieJpaAdapter implements ISerieRepository {
     public void delete(Integer id) {
         serieJpaRepository.deleteById(id);
     }
+
+    @Override
+    public boolean existsById(Integer id) {
+        return serieJpaRepository.existsById(id);
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return serieJpaRepository.existsByName(name);
+    }
+
+    @Override
+    public Serie findByName(String name) {
+        return serieJpaRepository.findByName(name)
+                .map(serieMapper::toDomain)
+                .orElse(null);
+    }
+
+    @Override
+    public int countFiguresBySerieId(Integer serieId) {
+        return serieJpaRepository.countFiguresBySerieId(serieId);
+    }
+
+    @Override
+    public long count() {
+        return serieJpaRepository.count();
+    }
 }

@@ -1,25 +1,13 @@
 package com.torami.ToramiStore.domain.exceptions.filters.category;
 
-public class CategoryDeleteException extends RuntimeException {
+import com.torami.ToramiStore.domain.exceptions.DomainException;
 
-    private final Integer categoryId;
-    private final String errorCode = "CATEGORY_DELETE_ERROR";
+public class CategoryDeleteException extends DomainException {
+    public CategoryDeleteException(Integer categoryId, String message, Throwable cause) {
+        super("Failed to delete category with ID " + categoryId + ": " + message, "CATEGORY_DELETE_ERROR", 500, cause);
+    }
 
     public CategoryDeleteException(Integer categoryId, String message) {
-        super("Failed to delete category with ID " + categoryId + ": " + message);
-        this.categoryId = categoryId;
-    }
-
-    public CategoryDeleteException(Integer categoryId, String message, Throwable cause) {
-        super("Failed to delete category with ID " + categoryId + ": " + message, cause);
-        this.categoryId = categoryId;
-    }
-
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public String getErrorCode() {
-        return errorCode;
+        super("Failed to delete category with ID " + categoryId + ": " + message, "CATEGORY_DELETE_ERROR", 500);
     }
 }

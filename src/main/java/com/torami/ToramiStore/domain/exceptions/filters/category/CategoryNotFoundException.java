@@ -1,21 +1,9 @@
 package com.torami.ToramiStore.domain.exceptions.filters.category;
 
-public class CategoryNotFoundException extends RuntimeException {
+import com.torami.ToramiStore.domain.exceptions.DomainException;
 
-    private final Integer id;
-    private final String errorCode = "CATEGORY_NOT_FOUND";
-
+public class CategoryNotFoundException extends DomainException {
     public CategoryNotFoundException(Integer id) {
-        super("Category with ID " + id + " not found");
-        this.id = id;
+        super("Category with ID " + id + " not found", "CATEGORY_NOT_FOUND", 404);
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getErrorCode() {
-        return errorCode;
-    }
-
 }

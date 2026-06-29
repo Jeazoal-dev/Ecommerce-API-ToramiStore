@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse<T> {
 
     private int status;
@@ -46,14 +46,19 @@ public class ApiResponse<T> {
         this.path = path;
     }
 
+    // ===== MÉTODOS FACTORY =====
+
+    // 200 OK
     public static <T> ApiResponse<T> success(T data, String message, String path) {
         return new ApiResponse<>(200, message, data, path);
     }
 
+    // 201 CREATED
     public static <T> ApiResponse<T> created(T data, String message, String path) {
         return new ApiResponse<>(201, message, data, path);
     }
 
+    // 204 NO CONTENT
     public static <T> ApiResponse<T> noContent(String message, String path) {
         return new ApiResponse<>(204, message, path);
     }
@@ -70,4 +75,7 @@ public class ApiResponse<T> {
         return new ApiResponse<>(500, message, errorCode, path);
     }
 
+    public static <T> ApiResponse<T> error(int status, String message, String errorCode, String path) {
+        return new ApiResponse<>(status, message, errorCode, path);
+    }
 }

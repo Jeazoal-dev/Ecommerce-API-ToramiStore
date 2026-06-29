@@ -1,21 +1,30 @@
 package com.torami.ToramiStore.domain.models.filters;
 
-import lombok.AllArgsConstructor;
+import com.torami.ToramiStore.domain.exceptions.filters.manufacturer.ManufacturerInvalidNameException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Manufacturer {
     private Integer id;
     private String name;
 
     public Manufacturer(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Manufacturer name cannot be empty");
+            throw new ManufacturerInvalidNameException(name, "cannot be empty");
         }
-        this.name = name;
+        if (name.length() < 3) {
+            throw new ManufacturerInvalidNameException(name, "must have at least 3 characters");
+        }
+        if (name.length() > 100) {
+            throw new ManufacturerInvalidNameException(name, "cannot exceed 100 characters");
+        }
+        this.name = name.trim();
     }
 
+    public Manufacturer(Integer id, String name) {
+        this(name);
+        this.id = id;
+    }
 }
