@@ -2,7 +2,7 @@ package com.torami.ToramiStore.application.service.filters;
 
 import com.torami.ToramiStore.application.port.in.filters.ISerieService;
 import com.torami.ToramiStore.application.port.out.filters.ISerieRepository;
-import com.torami.ToramiStore.domain.exceptions.filters.Serie.SerieNotFoundException;
+import com.torami.ToramiStore.domain.exceptions.filters.serie.SerieNotFoundException;
 import com.torami.ToramiStore.domain.models.filters.Serie;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

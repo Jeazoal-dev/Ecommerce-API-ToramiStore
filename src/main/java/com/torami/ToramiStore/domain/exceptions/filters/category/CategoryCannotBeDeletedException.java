@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.domain.exceptions.filters.Category;
+package com.torami.ToramiStore.domain.exceptions.filters.category;
 
 public class CategoryCannotBeDeletedException extends RuntimeException {
 
@@ -23,5 +23,5 @@ public class CategoryCannotBeDeletedException extends RuntimeException {
     public String getErrorCode() {
         return errorCode;
     }
-    
+
 }

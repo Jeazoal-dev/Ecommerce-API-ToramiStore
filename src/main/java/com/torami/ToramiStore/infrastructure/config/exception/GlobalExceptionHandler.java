@@ -1,6 +1,6 @@
 package com.torami.ToramiStore.infrastructure.config.exception;
 
-import com.torami.ToramiStore.domain.exceptions.filters.Category.*;
+import com.torami.ToramiStore.domain.exceptions.filters.category.*;
 import com.torami.ToramiStore.infrastructure.dto.response.ApiResponse;
 import com.torami.ToramiStore.infrastructure.dto.response.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;

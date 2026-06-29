@@ -2,7 +2,7 @@ package com.torami.ToramiStore.application.service.filters;
 
 import com.torami.ToramiStore.application.port.in.filters.ICategoryService;
 import com.torami.ToramiStore.application.port.out.filters.ICategoryRepository;
-import com.torami.ToramiStore.domain.exceptions.filters.Category.*;
+import com.torami.ToramiStore.domain.exceptions.filters.category.*;
 import com.torami.ToramiStore.domain.models.filters.Category;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

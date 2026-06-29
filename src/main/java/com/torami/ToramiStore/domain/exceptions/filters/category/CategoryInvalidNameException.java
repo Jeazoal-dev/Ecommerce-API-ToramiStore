@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.domain.exceptions.filters.Category;
+package com.torami.ToramiStore.domain.exceptions.filters.category;
 
 public class CategoryInvalidNameException extends RuntimeException {
 

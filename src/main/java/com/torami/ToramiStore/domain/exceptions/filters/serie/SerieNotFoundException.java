@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.domain.exceptions.filters.Serie;
+package com.torami.ToramiStore.domain.exceptions.filters.serie;
 
 public class SerieNotFoundException extends RuntimeException {
     public SerieNotFoundException(String message) {

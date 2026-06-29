@@ -2,7 +2,7 @@ package com.torami.ToramiStore.application.service.filters;
 
 import com.torami.ToramiStore.application.port.in.filters.IManufacturerService;
 import com.torami.ToramiStore.application.port.out.filters.IManufacturerRepository;
-import com.torami.ToramiStore.domain.exceptions.filters.Manufacturer.ManufacturerNotFoundException;
+import com.torami.ToramiStore.domain.exceptions.filters.manufacturer.ManufacturerNotFoundException;
 import com.torami.ToramiStore.domain.models.filters.Manufacturer;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

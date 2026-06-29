@@ -1,6 +1,6 @@
 package com.torami.ToramiStore.domain.models.filters;
 
-import com.torami.ToramiStore.domain.exceptions.filters.Category.CategoryInvalidNameException;
+import com.torami.ToramiStore.domain.exceptions.filters.category.CategoryInvalidNameException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

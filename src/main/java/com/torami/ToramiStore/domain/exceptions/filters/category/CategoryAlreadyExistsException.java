@@ -1,4 +1,4 @@
-package com.torami.ToramiStore.domain.exceptions.filters.Category;
+package com.torami.ToramiStore.domain.exceptions.filters.category;
 
 public class CategoryAlreadyExistsException extends RuntimeException {
 
@@ -17,4 +17,5 @@ public class CategoryAlreadyExistsException extends RuntimeException {
     public String getErrorCode() {
         return errorCode;
     }
+
 }
